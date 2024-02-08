@@ -51,4 +51,12 @@ There are few requirements that must be met before you begin:
 
  ### SET UP A VIRTUAL PRIVATE CLOUD (VPC)
  --------
- 1. Create a VPC
+1. Create a VPC
+
+ ![](./images/create-vpc.png)
+
+ ![](./images/vpc-config.png)
+
+2. Enable DNS hosting
+
+ ![](./images/enable.png)
