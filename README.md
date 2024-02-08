@@ -32,3 +32,21 @@ There are few requirements that must be met before you begin:
 
     ![](./images/dev-devops.png)
 
+    * Login to the newly created AWS account using the new email address.
+
+    ![](./images/devops2.png)
+
+2. Create a domain name for your company. I used [namecheap](https://www.namecheap.com/).
+3. Create a hosted zone in AWS, and map it to your domain. 
+
+ ![](./images/route53.png)
+
+ ![](./images/create-hosted-zone.png)
+
+ ![](./images/savvytek.png)
+
+ ![](./images/ns.png)
+
+ ![](./images/ns-2.png)
+ 
+ ### SET UP A VIRTUAL PRIVATE CLOUD (VPC)
