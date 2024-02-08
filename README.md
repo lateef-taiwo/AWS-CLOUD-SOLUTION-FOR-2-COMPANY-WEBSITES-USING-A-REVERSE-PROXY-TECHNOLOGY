@@ -48,5 +48,7 @@ There are few requirements that must be met before you begin:
  ![](./images/ns.png)
 
  ![](./images/ns-2.png)
- 
+
  ### SET UP A VIRTUAL PRIVATE CLOUD (VPC)
+ --------
+ 1. Create a VPC
