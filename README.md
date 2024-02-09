@@ -60,3 +60,24 @@ There are few requirements that must be met before you begin:
 2. Enable DNS hosting
 
  ![](./images/enable.png)
+
+ 3. Create internet gateway as shown in the architecture.
+
+ ![](./images/igw.png)
+
+ ![](./images/create%20igw.png)
+
+ ![](./images/savvytek-igw.png)
+
+ ![](./images/attack-to-vpc.png)
+
+ ![](./images/attach-vpc-2.png)
+
+
+4. Create the subnets
+
+Use this website to get the CIDR blocks easily. [ipinfo](https://ipinfo.io/ips).
+
+ 
+
+
