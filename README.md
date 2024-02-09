@@ -223,3 +223,9 @@ Configure EFS
 ![](./images/details-tooling-2.png)
 
 ![](./images/create-access-point-4.png)
+
+### Configure RDS
+-----
+#### Pre-requisite:
+
+* Create a KMS Key
