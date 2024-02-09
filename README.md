@@ -229,3 +229,51 @@ Configure EFS
 #### Pre-requisite:
 
 * Create a KMS Key
+![](./images/kms.png)
+
+![](./images/create-a-key.png)
+
+![](./images/configure-key-next.png)
+
+![](./images/alias-kms.png)
+
+![](./images/search-key-administrators.png)
+
+![](./images/search-key-users.png)
+
+![](./images/finish.png)
+
+To ensure that yout databases are highly available and also have failover support in case one availability zone fails, we will configure a multi-AZ set up of RDS MySQL database instance. In our case, since we are only using 2 AZs, we can only failover to one, but the same concept applies to 3 Availability Zones.
+
+To configure RDS, follow steps below:
+
+1. Create a subnet group and add 2 private subnets (data Layer)
+
+2. Create the DataBase
+
+![](./images/create-db-subnet-group.png)
+
+![](./images/subnet-group-details-1.png)
+
+![](./images/subnet-group-details-2.png)
+
+Now create the DB
+![](./images/create-database.png)
+
+![](./images/choose-database.png)
+
+![](./images/engine-version.png)
+
+![](./images/db-instance-identifier.png)
+
+![](./images/db-config.png)
+
+![](./images/db-config-2.png)
+
+![](./images/enable-encryption.png)
+
+![](./images/create-database-2.png)
+
+#### Configure Loadbalancers and Target Groups
+
+1. Create Target group for NGINX, tooling amd wordpress targets
