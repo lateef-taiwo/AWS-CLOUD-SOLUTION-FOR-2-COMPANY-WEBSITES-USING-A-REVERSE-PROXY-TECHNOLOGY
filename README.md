@@ -274,6 +274,168 @@ Now create the DB
 
 ![](./images/create-database-2.png)
 
-#### Configure Loadbalancers and Target Groups
+### Set Up Compute Resources for Bastion
+-----
+#### Provision the EC2 Instances for Bastion
+Create an EC2 Instance based on Red Hat Enterprise Linux (AMI) (You can search for this ami, RHEL-8.7.0_HVM-20230215-x86_64-13-Hourly2-GP2
+) per each Availability Zone in the same Region and same AZ where you created Nginx server
+* Ensure that it has the following software installed
+   * python
+   * ntp
+   * net-tools
+   * vim
+   * wget
+   * telnet
+   * epel-release
+   * htop
+
+We will use instance to create an ami for launching instances in Auto-scaling groups so all the installations will be done before creating the ami from the instance
+
+#### Bastion ami installation
+
+    sudu su -
+    yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
+    yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm 
+    yum install wget vim python3 telnet htop git mysql net-tools chrony -y 
+    systemctl start chronyd 
+    systemctl enable chronyd
+
+#### Nginx ami installation
+
+    yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+    yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+    yum install wget vim python3 telnet htop git mysql net-tools chrony -y
+
+    systemctl start chronyd
+
+    systemctl enable chronyd
+
+#### configure selinux policies for the webservers and nginx servers
+
+    setsebool -P httpd_can_network_connect=1
+    setsebool -P httpd_can_network_connect_db=1
+    setsebool -P httpd_execmem=1
+    setsebool -P httpd_use_nfs 1
+
+#### This section will insatll amazon efs utils for mounting the target on the Elastic file system
+
+    git clone https://github.com/aws/efs-utils
+
+    cd efs-utils
+
+    yum install -y make
+
+    yum install -y rpm-build
+
+    make rpm 
+
+    yum install -y  ./build/amazon-efs-utils*rpm
+
+#### Setting up self-signed certificate for the nginx instance
+
+    sudo mkdir /etc/ssl/private
+
+    sudo chmod 700 /etc/ssl/private
+
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ACS.key -out /etc/ssl/certs/ACS.crt
+
+    sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+ When you are done with setting up the self-signed certificate, you should see have s screen like the one below.
+
+ ![](./images/nginx-sefl-signed-cert-done.png)
+
+ * Verify self-signed cert is correctly installed
+
+ ![](./images/certs.png)
+
+#### webserver ami installation
+
+    yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+    yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+    yum install wget vim python3 telnet htop git mysql net-tools chrony -y
+
+    systemctl start chronyd
+
+    systemctl enable chronyd
+
+#### Configure selinux policies for the webservers and nginx servers
+
+    setsebool -P httpd_can_network_connect=1
+    setsebool -P httpd_can_network_connect_db=1
+    setsebool -P httpd_execmem=1
+    setsebool -P httpd_use_nfs 1
+
+#### This section will install amazon efs utils for mounting the target on the Elastic file system
+
+    git clone https://github.com/aws/efs-utils
+
+    cd efs-utils
+
+    yum install -y make
+
+    yum install -y rpm-build
+
+    make rpm 
+
+    yum install -y  ./build/amazon-efs-utils*rpm
+
+#### Setting up self-signed certificate for the apache webserver instance
+
+    yum install -y mod_ssl
+
+    openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -days 365 -out /etc/pki/tls/certs/ACS.crt
+
+    vi /etc/httpd/conf.d/ssl.conf
+![](./images/certs-2.png)
+
+ ![](./images/apache-cert.png)
+
+ #### References
+
+[IP ranges](https://ipinfo.io/ips)
+
+[Nginx reverse proxy server](https://www.nginx.com/resources/glossary/reverse-proxy-server/)
+
+[Understanding ec2 user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
+
+[Manually installing the Amazon EFS client](https://docs.aws.amazon.com/efs/latest/ug/installing-amazon-efs-utils.html#installing-other-distro)
+
+[creating target groups for AWS Loadbalancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
+
+[Self-Signed SSL Certificate for Apache](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-on-centos-8)
+
+[Create a Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7)
+
+#### Create AMIs from the 3 instances
+
+![](./images/create-image.png)
+
+![](./images/amis.png)
+
+#### Configure Load balancers and Target Groups
 
 1. Create Target group for NGINX, tooling amd wordpress targets
+
+![](./images/create-target-group.png)
+
+![](./images/target-group-config-1.png)
+
+![](./images/target-group-config-2.png)
+
+![](./images/target-group-config-3.png)
+
+![](./images/create-target-group-2.png)
+
+![](./images/target-groups.png)
+
+
+
+#### Login into the RDS instance and create database for wordpress and tooling wordpress and tooling database
+
+    mysql -h acs-database.cdqpbjkethv0.us-east-1.rds.amazonaws.com -u ACSadmin -p
+
+    CREATE DATABASE toolingdb; CREATE DATABASE wordpressdb;
