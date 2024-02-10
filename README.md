@@ -432,7 +432,45 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
 ![](./images/target-groups.png)
 
+2. Configure Load balancers
 
+![](./images/create-alb.png)
+
+![](./images/alb.png)
+
+![](./images/external-alb-config-1.png)
+
+![](./images/external-alb-config-2.png)
+
+![](./images/external-alb-config-3.png)
+
+![](./images/external-alb-config-4.png)
+
+![](./images/external-alb-config-5.png)
+
+Repeat the same procedure for internal ALB, select wordpress as the default target and create a rule to send traffic to tooling if the headers match our specified parameters.
+
+![](./images/albs.png)
+
+![](./images/edit-rules.png)
+
+![](./images/add-rule.png)
+
+![](./images/add-condition.png)
+
+![](./images/host-header.png)
+
+![](./images/host-header-2.png)
+
+![](./images/next.png)
+
+![](./images/listerner-rules.png)
+
+![](./images/albs-2.png)
+
+#### Create Launch Templates
+
+From the created custom AMIs, create Launch templates for each of the instances
 
 #### Login into the RDS instance and create database for wordpress and tooling wordpress and tooling database
 
