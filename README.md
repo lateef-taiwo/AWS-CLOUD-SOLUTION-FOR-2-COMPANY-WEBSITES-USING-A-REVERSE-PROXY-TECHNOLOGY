@@ -291,7 +291,7 @@ Create an EC2 Instance based on Red Hat Enterprise Linux (AMI) (You can search f
 
 We will use instance to create an ami for launching instances in Auto-scaling groups so all the installations will be done before creating the ami from the instance
 
-#### Bastion ami installation
+### Bastion ami installation
 
     sudu su -
     yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm 
@@ -312,14 +312,14 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
     systemctl enable chronyd
 
-#### configure selinux policies for the webservers and nginx servers
+### configure selinux policies for the webservers and nginx servers
 
     setsebool -P httpd_can_network_connect=1
     setsebool -P httpd_can_network_connect_db=1
     setsebool -P httpd_execmem=1
     setsebool -P httpd_use_nfs 1
 
-#### This section will insatll amazon efs utils for mounting the target on the Elastic file system
+### This section will insatll amazon efs utils for mounting the target on the Elastic file system
 
     git clone https://github.com/aws/efs-utils
 
@@ -333,7 +333,7 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
     yum install -y  ./build/amazon-efs-utils*rpm
 
-#### Setting up self-signed certificate for the nginx instance
+### Setting up self-signed certificate for the nginx instance
 
     sudo mkdir /etc/ssl/private
 
@@ -350,7 +350,7 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
  ![](./images/certs.png)
 
-#### webserver ami installation
+### webserver ami installation
 
     yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
@@ -362,14 +362,14 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
     systemctl enable chronyd
 
-#### Configure selinux policies for the webservers and nginx servers
+### Configure selinux policies for the webservers and nginx servers
 
     setsebool -P httpd_can_network_connect=1
     setsebool -P httpd_can_network_connect_db=1
     setsebool -P httpd_execmem=1
     setsebool -P httpd_use_nfs 1
 
-#### This section will install amazon efs utils for mounting the target on the Elastic file system
+### This section will install amazon efs utils for mounting the target on the Elastic file system
 
     git clone https://github.com/aws/efs-utils
 
@@ -383,7 +383,7 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
     yum install -y  ./build/amazon-efs-utils*rpm
 
-#### Setting up self-signed certificate for the apache webserver instance
+### Setting up self-signed certificate for the apache webserver instance
 
     yum install -y mod_ssl
 
@@ -410,13 +410,13 @@ We will use instance to create an ami for launching instances in Auto-scaling gr
 
 [Create a Self-Signed SSL Certificate for Nginx](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7)
 
-#### Create AMIs from the 3 instances
+### Create AMIs from the 3 instances
 
 ![](./images/create-image.png)
 
 ![](./images/amis.png)
 
-#### Configure Load balancers and Target Groups
+### Configure Load balancers and Target Groups
 
 1. Create Target group for NGINX, tooling amd wordpress targets
 
@@ -468,11 +468,24 @@ Repeat the same procedure for internal ALB, select wordpress as the default targ
 
 ![](./images/albs-2.png)
 
-#### Create Launch Templates
+### Create Launch Templates
 
 From the created custom AMIs, create Launch templates for each of the instances
+![](./images/create-launch-template-1.png)
 
-#### Login into the RDS instance and create database for wordpress and tooling wordpress and tooling database
+![](./images/create-launch-template-2.png)
+
+![](./images/create-launch-template-3.png)
+
+![](./images/create-launch-template-4.png)
+
+![](./images/create-launch-template-5.png)
+
+Fill in the userdata for each launch template with the details from this [repo](https://github.com/lateef-taiwo/savvytek-project-config.git) and edit it with your details
+
+![](./images/launch-templates.png)
+
+### Login into the RDS instance and create database for wordpress and tooling wordpress and tooling database
 
     mysql -h acs-database.cdqpbjkethv0.us-east-1.rds.amazonaws.com -u ACSadmin -p
 
