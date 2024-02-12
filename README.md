@@ -532,3 +532,18 @@ Fill in the userdata for each launch template with the details from this [repo](
     create database toolingdb; create database wordpressdb;
 
 ![](./images/db.png)
+
+### Add Records to Route 53
+
+Add records for `tooling.savvytek.online`. `www.tooling.savvytek.online`, `wordpress.savvytek.online`, `www.wordpress.savvytek.online` using an Alias point it to your internet facing load balancer.
+
+![](./images/create-record.png)
+
+![](./images/create-record-2.png)
+
+![](./images/create-record-3.png)
+
+![](./images/create-record-4.png)
+
+![](./images/create-record-5.png)
+
