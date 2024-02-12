@@ -503,20 +503,21 @@ Fill in the userdata for each launch template with the details from this [repo](
 
 ![](./images/asg-config-6.png)
 
+2. For nginx
+
 ![](./images/asg-config-7.png)
 
-2. For nginx
 ![](./images/asg-config-8.png)
-
-3. For Wordpress
 
 ![](./images/asg-config-9.png)
 
-4. For Tooling-website
+3. For Wordpress
 
 ![](./images/asg-config-10.png)
 
 ![](./images/asg-config-11.png)
+
+4. For Tooling-website
 
 ![](./images/asg-config-12.png)
 
