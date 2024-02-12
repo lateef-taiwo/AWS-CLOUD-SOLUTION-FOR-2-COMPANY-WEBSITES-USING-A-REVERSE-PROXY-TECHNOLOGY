@@ -485,8 +485,49 @@ Fill in the userdata for each launch template with the details from this [repo](
 
 ![](./images/launch-templates.png)
 
+### Create AutoScaling Groups
+
+1. For Bastion
+
+![](./images/asg.png)
+
+![](./images/asg-config-1.png)
+
+![](./images/asg-config-2.png)
+
+![](./images/asg-config-3.png)
+
+![](./images/asg-config-4.png)
+
+![](./images/asg-config-5.png)
+
+![](./images/asg-config-6.png)
+
+![](./images/asg-config-7.png)
+
+2. For nginx
+![](./images/asg-config-8.png)
+
+3. For Wordpress
+
+![](./images/asg-config-9.png)
+
+4. For Tooling-website
+
+![](./images/asg-config-10.png)
+
+![](./images/asg-config-11.png)
+
+![](./images/asg-config-12.png)
+
+![](./images/asg-config-13.png)
+
+![](./images/asgs.png)
+
 ### Login into the RDS instance and create database for wordpress and tooling wordpress and tooling database
 
-    mysql -h acs-database.cdqpbjkethv0.us-east-1.rds.amazonaws.com -u ACSadmin -p
+    mysql -h savvytek-database.c4scns6d3saq.eu-west-2.rds.amazonaws.com -u ACSadmin -p
 
-    CREATE DATABASE toolingdb; CREATE DATABASE wordpressdb;
+    create database toolingdb; create database wordpressdb;
+
+![](./images/db.png)
