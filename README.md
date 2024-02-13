@@ -539,13 +539,13 @@ Add records for `tooling.savvytek.online`. `www.tooling.savvytek.online`, `wordp
 
 ![](./images/create-record.png)
 
-![](./images/create-record-2.png)
+![](./images/create-records-2.png)
 
-![](./images/create-record-3.png)
+![](./images/create-records-3.png)
 
-![](./images/create-record-4.png)
+![](./images/create-records-4.png)
 
-![](./images/create-record-5.png)
+![](./images/create-records-5.png)
 
 ### Test your websites.
 
