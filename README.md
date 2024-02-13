@@ -547,7 +547,7 @@ Add records for `tooling.savvytek.online`. `www.tooling.savvytek.online`, `wordp
 
 ![](./images/create-record-5.png)
 
-Check the two websites using the record names created.
+### Test your websites.
 
 * Tooling website
 
