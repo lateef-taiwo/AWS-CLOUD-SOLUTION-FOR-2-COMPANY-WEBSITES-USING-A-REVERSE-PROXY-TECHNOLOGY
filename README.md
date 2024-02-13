@@ -559,3 +559,5 @@ Check the two websites using the record names created.
 
 ![](./images/worpress-site.png)
 
+![](./images/wordpress-site-1.png)
+
