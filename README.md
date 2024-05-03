@@ -1,7 +1,7 @@
 ### AWS-CLOUD-SOLUTION-FOR-2-COMPANY-WEBSITES-USING-A-REVERSE-PROXY-TECHNOLOGY
 ------
 #### General Overview
-You will build a secure infrastructure inside AWS VPC (Virtual Private Cloud) for a fictitious company named WakaBetter that uses WordPress CMS for its main business website, and a Tooling Website for their DevOps team. As part of the company’s desire for improved security and performance, a decision has been made to use a reverse proxy technology from NGINX to achieve this. Cost, Security, and Scalability are the major requirements for this project. Hence, implementing the architecture designed below, ensure that infrastructure for both websites, WordPress and Tooling, is resilient to Web Server’s failures, can accomodate to increased traffic and, at the same time, has reasonable cost. 
+You will build a secure infrastructure inside AWS VPC (Virtual Private Cloud) for a fictitious company named Savvytek that uses WordPress Content Management System (CMS) for its main business website, and a Tooling Website (PHP/MySQL) for their DevOps team. As part of the company’s desire for improved security and performance, a decision has been made to use a reverse proxy technology from NGINX to achieve this. Cost, Security, and Scalability are the major requirements for this project. Hence, implementing the architecture designed below, ensure that infrastructure for both websites, WordPress and Tooling, is resilient to Web Server’s failures, can accomodate increased traffic and, at the same time, has reasonable cost. 
 
 ![](./images/Architecture-Diagram.png)
 
@@ -206,7 +206,7 @@ Configure EFS
 
 ![](./images/savvytek-EFS.png)
 
-* Create 2 access points - ! for each of the website (wordpress and tooling) so that the files do not overwrite each other when we mount. 
+* Create 2 access points - For each of the website (wordpress and tooling) so that the files do not overwrite each other when we mount. 
 
 ![](./images/create-access-point.png)
 
